@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
 import { findAllContacts } from '../actions/ContactAction';
 
 const ContactList = () => {
@@ -13,16 +15,22 @@ const ContactList = () => {
   }, [dispatch]);
 
   const onRenderContacts = () => {
-    return getListContactResponse
-      ? getListContactResponse.map((contact) => {
-          return (
-            <div key={contact.id}>
-              <h1>{contact.name}</h1>
-              <h2>{contact.phone}</h2>
-            </div>
-          );
-        })
-      : onLoading();
+    return (
+      <div className='card' style={{ width: '24rem' }}>
+        <ul className='list-group list-group-flush'>
+          {
+          getListContactResponse
+            ? getListContactResponse.map((contact) => {
+                return (
+                  <li className='list-group-item' key={contact.id}>
+                    {contact.name} - {contact.phone}
+                  </li>
+                );
+              })
+            : onLoading()}
+        </ul>
+      </div>
+    );
   };
 
   const onLoading = () => {
@@ -32,7 +40,9 @@ const ContactList = () => {
   return (
     <div>
       <h2>List Contact</h2>
-      { onRenderContacts() }
+      <div className='container d-flex justify-content-center'>
+        {onRenderContacts()}
+      </div>
     </div>
   );
 };

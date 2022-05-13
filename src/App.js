@@ -1,6 +1,7 @@
 import './App.css';
-import ContactList from './pages/ContactList';
 
+import ContactForm from './pages/ContactForm';
+import ContactList from './pages/ContactList';
 import Navbar from './pages/Navbar';
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
     <div className='App'>
       <Navbar />
       <ContactList />
+      <hr />
+      <ContactForm />
     </div>
   );
 }
