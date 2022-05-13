@@ -1,9 +1,29 @@
 {
-    "contact": [
-        {
-            "name": "Mulyono Putra",
-            "phone": "081289900099",
-            "id": 1
-        }
-    ]
+  "contact": [
+    {
+      "name": "Mulyono Putra",
+      "phone": "081289900099",
+      "id": 1
+    },
+    {
+      "name": "Vina Bellani",
+      "phone": "08128888888",
+      "id": 2
+    },
+    {
+      "name": "Icha",
+      "phone": "0896000000",
+      "id": 3
+    },
+    {
+      "name": "Fahmi",
+      "phone": "08888888",
+      "id": 4
+    },
+    {
+      "name": "Akbar",
+      "phone": "0812892929292",
+      "id": 5
+    }
+  ]
 }
