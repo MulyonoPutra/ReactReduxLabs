@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const GET_CONTACTS = 'GET_CONTACTS';
 export const ADD_CONTACT = 'ADD_CONTACT';
+export const DELETE_CONTACT = 'DELETE_CONTACT';
 
 export const findAllContacts = () => {
   return (dispatch) => {
@@ -68,6 +69,43 @@ export const addContact = (data) => {
       .catch((error) => {
         dispatch({
           type: ADD_CONTACT,
+          payload: {
+            loading: false,
+            data: undefined,
+            errorMessages: error.messages,
+          },
+        });
+      });
+  };
+};
+
+export const deleteContact = (id) => {
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_CONTACT,
+      payload: {
+        loading: true,
+        data: undefined,
+        errorMessages: null,
+      },
+    });
+
+    axios
+      .delete('http://localhost:3000/contact/' + id)
+      .then((response) => {
+        console.log(response.data);
+        dispatch({
+          type: DELETE_CONTACT,
+          payload: {
+            loading: true,
+            data: response.data,
+            errorMessages: null,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: DELETE_CONTACT,
           payload: {
             loading: false,
             data: undefined,

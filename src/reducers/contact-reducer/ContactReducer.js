@@ -1,4 +1,4 @@
-import { ADD_CONTACT, GET_CONTACTS } from '../../actions/ContactAction';
+import { ADD_CONTACT, DELETE_CONTACT, GET_CONTACTS } from '../../actions/ContactAction';
 
 const initialState = {
   getListContactResponse: undefined,
@@ -8,6 +8,10 @@ const initialState = {
   addContactResponse: undefined,
   addContactLoading: false,
   addContactError: false,
+
+  deleteContactResponse: undefined,
+  deleteContactLoading: false,
+  deleteContactError: false,
 };
 
 const contactReducer = (state = initialState, action) => {
@@ -25,6 +29,13 @@ const contactReducer = (state = initialState, action) => {
         addContactResponse: action.payload.data,
         addContactLoading: action.payload.loading,
         addContactError: action.payload.errorMessages,
+      };
+    case DELETE_CONTACT:
+      return {
+        ...state,
+        deleteContactResponse: action.payload.data,
+        deleteContactLoading: action.payload.loading,
+        deleteContactError: action.payload.errorMessages,
       };
     default:
       return state;

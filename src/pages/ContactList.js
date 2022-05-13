@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { findAllContacts } from '../actions/ContactAction';
+import { deleteContact, findAllContacts } from '../actions/ContactAction';
 
 const ContactList = () => {
-  // @ts-ignore
-  const { getListContactResponse, getContactLoading, getContactError } = useSelector((state) => state.ContactReducer);
+  const {
+    getListContactResponse,
+    getContactLoading,
+    getContactError,
+    deleteContactResponse,
+  } = useSelector((state) => state.ContactReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,16 +18,31 @@ const ContactList = () => {
     dispatch(findAllContacts());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (deleteContactResponse) {
+      dispatch(findAllContacts());
+    }
+  }, [deleteContactResponse, dispatch]);
+
   const onRenderContacts = () => {
     return (
-      <div className='card' style={{ width: '24rem' }}>
+      <div className='card' style={{ width: '34rem' }}>
         <ul className='list-group list-group-flush'>
-          {
-          getListContactResponse
+          {getListContactResponse
             ? getListContactResponse.map((contact) => {
                 return (
-                  <li className='list-group-item' key={contact.id}>
-                    {contact.name} - {contact.phone}
+                  <li className='list-group-item text-start' key={contact.id}>
+                    <strong>{contact.name}</strong> - {contact.phone}
+                    <div className='position-absolute top-0 end-0'>
+                      <button className='btn btn-warning'>Edit</button> &nbsp;
+                      <button
+                        className='btn btn-danger'
+                        // @ts-ignore
+                        onClick={() => dispatch(deleteContact(contact.id))}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </li>
                 );
               })
