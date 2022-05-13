@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteContact, findAllContacts } from '../actions/ContactAction';
+import {
+  deleteContact,
+  findAllContacts,
+  detailContact,
+} from '../actions/ContactAction';
 
 const ContactList = () => {
   const {
@@ -34,10 +38,15 @@ const ContactList = () => {
                   <li className='list-group-item text-start' key={contact.id}>
                     <strong>{contact.name}</strong> - {contact.phone}
                     <div className='position-absolute top-0 end-0'>
-                      <button className='btn btn-warning'>Edit</button> &nbsp;
+                      <button
+                        className='btn btn-warning'
+                        onClick={() => dispatch(detailContact(contact))}
+                      >
+                        Edit
+                      </button>{' '}
+                      &nbsp;
                       <button
                         className='btn btn-danger'
-                        // @ts-ignore
                         onClick={() => dispatch(deleteContact(contact.id))}
                       >
                         Delete

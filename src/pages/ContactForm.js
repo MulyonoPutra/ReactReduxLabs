@@ -1,29 +1,55 @@
 import React, { useEffect, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, findAllContacts } from '../actions/ContactAction';
+
+import {
+  addContact,
+  findAllContacts,
+  updateContact,
+} from '../actions/ContactAction';
 
 const ContactForm = () => {
+  const [id, setId] = useState(null);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const dispatch = useDispatch();
 
-  // @ts-ignore
-  const { addContactResponse } = useSelector((state) => state.ContactReducer);
+  const { addContactResponse, detailContactResponse, updateContactResponse } =
+    useSelector((state) => state.ContactReducer);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // @ts-ignore
-    dispatch(addContact({ name: name, phone: phone }));
+
+    if (id) {
+      dispatch(updateContact({ id: id, name: name, phone: phone }));
+    } else {
+      dispatch(addContact({ name: name, phone: phone }));
+    }
   };
 
   useEffect(() => {
     if (addContactResponse) {
-      // @ts-ignore
       dispatch(findAllContacts());
       setName('');
       setPhone('');
     }
   }, [addContactResponse, dispatch]);
+
+  useEffect(() => {
+    if (updateContactResponse) {
+      dispatch(findAllContacts());
+      setName('');
+      setPhone('');
+    }
+  }, [updateContactResponse, dispatch]);
+
+  useEffect(() => {
+    if (detailContactResponse) {
+      setName(detailContactResponse.name);
+      setPhone(detailContactResponse.phone);
+      setId(detailContactResponse.id);
+    }
+  }, [detailContactResponse, dispatch]);
 
   return (
     <div>
