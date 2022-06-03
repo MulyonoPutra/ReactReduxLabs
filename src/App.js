@@ -1,12 +1,12 @@
-import './App.css';
+import ContactList from "./pages/ContactList";
+import "./App.css";
 
-import ContactForm from './pages/ContactForm';
-import ContactList from './pages/ContactList';
-import Navbar from './pages/Navbar';
+import ContactForm from "./pages/ContactForm";
+import Navbar from "./pages/Navbar";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Navbar />
       <ContactList />
       <hr />

@@ -18,7 +18,6 @@ const ContactList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(findAllContacts());
   }, [dispatch]);
 

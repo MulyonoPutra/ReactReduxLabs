@@ -14,12 +14,10 @@ const ContactForm = () => {
   const [phone, setPhone] = useState('');
   const dispatch = useDispatch();
 
-  const { addContactResponse, detailContactResponse, updateContactResponse } =
-    useSelector((state) => state.ContactReducer);
+  const { addContactResponse, detailContactResponse, updateContactResponse } = useSelector((state) => state.ContactReducer);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (id) {
       dispatch(updateContact({ id: id, name: name, phone: phone }));
     } else {
